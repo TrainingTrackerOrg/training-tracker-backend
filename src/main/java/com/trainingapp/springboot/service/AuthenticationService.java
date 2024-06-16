@@ -1,6 +1,7 @@
 package com.trainingapp.springboot.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.trainingapp.springboot.exception.LoginException;
 import com.trainingapp.springboot.model.User;
 import com.trainingapp.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,9 @@ public class AuthenticationService {
 
     public String authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
+        if(username.equals("") || password.equals("")) {
+            return null;
+        }
         if (user == null) {
             return null;
         }
