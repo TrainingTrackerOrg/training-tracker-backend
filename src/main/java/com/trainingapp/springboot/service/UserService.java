@@ -3,6 +3,7 @@ package com.trainingapp.springboot.service;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.trainingapp.springboot.dto.CreateUserDTO;
 import com.trainingapp.springboot.dto.UserDTO;
+import com.trainingapp.springboot.exception.NoDataException;
 import com.trainingapp.springboot.exception.RegistrationException;
 import com.trainingapp.springboot.model.User;
 import com.trainingapp.springboot.repository.UserRepository;
@@ -23,6 +24,9 @@ public class UserService {
 
 
     public UserDTO createUser(CreateUserDTO newUser) {
+        if(newUser.getUsername().isBlank() || newUser.getFullName().isBlank() || newUser.getPassword().isBlank()) {
+            throw new NoDataException();
+        }
         List<User> allUsers = userRepository.findAll();
         allUsers.forEach(user -> {
             if (newUser.getUsername().equals(user.getUsername())) {
