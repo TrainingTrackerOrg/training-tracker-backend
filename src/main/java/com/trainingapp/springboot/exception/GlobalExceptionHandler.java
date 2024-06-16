@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ResponseStatus( HttpStatus.BAD_REQUEST)
+    @ResponseStatus( HttpStatus.CONFLICT)
     @ExceptionHandler(RegistrationException.class)
     public String handleUsernameAlreadyTakenException(RegistrationException ex) {
         return ex.getMessage();
@@ -18,4 +18,8 @@ public class GlobalExceptionHandler {
     public String handleUsernameAlreadyTakenException(LoginException ex) {
         return ex.getMessage();
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NoDataException.class)
+    public String handleFieldsEmptyException(NoDataException ex) {return ex.getMessage(); }
 }
