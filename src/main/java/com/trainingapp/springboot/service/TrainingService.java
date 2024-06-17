@@ -36,12 +36,13 @@ public class TrainingService {
         return trainingsFinal;
     }
 
-    public WeeklyTrainingDTO weeklyTrainingData(Month month, int week, Long id) {
+    public WeeklyTrainingDTO weeklyTrainingData(Month month, int week, Long id, Long year) {
         List<Training> trainings = trainingRepository.findByCreatorId(id);
         List<TrainingDTO> trainingsFinal = new ArrayList<>();
         trainings.forEach(training -> {
+
             int day = training.getStart().getDayOfMonth();
-            if(training.getStart().getMonth().equals(month)) {
+            if(training.getStart().getMonth().equals(month) && training.getStart().getYear() == year) {
                 switch (week) {
                     case 1:
                         if(day<=7) {
