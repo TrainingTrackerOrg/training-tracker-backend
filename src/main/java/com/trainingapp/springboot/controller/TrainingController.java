@@ -24,8 +24,8 @@ public class TrainingController {
         return trainingService.getAllByUserId(id);
     }
 
-    @GetMapping("/all-by-month/{month}/{week}/{id}")
-    public WeeklyTrainingDTO getAllByMonth(@PathVariable Month month, @PathVariable int week, @PathVariable Long id) {
-        return trainingService.weeklyTrainingData(month,week,id);
+    @GetMapping("/all-by-month/{month}/{week}/{id}/{year}")
+    public WeeklyTrainingDTO getAllByMonth(@PathVariable Month month, @PathVariable int week, @PathVariable Long id,@PathVariable Long year) {
+        return trainingService.weeklyTrainingData(month,week,id,year);
     }
 }
